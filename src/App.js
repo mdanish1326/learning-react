@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import IncrementButton from "./component/IncrementButton";
+import DecrementButton from "./component/DecrementButton";
+import { useState } from "react";
+import { Provider, useSelector } from "react-redux";
+import store from "./redux/store";
 
 function App() {
+  // const [value, updateValue] = useState(0);
+  const value = useSelector((state) => state.val);
   return (
+    // <Provider>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <IncrementButton />
+      {value}
+      <DecrementButton />
     </div>
+    // </Provider>
   );
 }
 
-export default App;
+const AppWrapper = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
+
+export default AppWrapper;
